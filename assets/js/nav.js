@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 $menu_openers.each(function(index) {
                     var $this = $(this);
+                    // Remove any existing handlers to prevent duplicates
                     $this.off('click').on('click', function(event) {
                         event.preventDefault();
                         event.stopPropagation();
@@ -97,8 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         $this.toggleClass('active');
                         $parentLi.toggleClass('active');
                         console.log('Toggled opener #' + index + ': ' + $this.text() + ', Active: ' + !isActive);
+                        // Log DOM state for debugging
+                        console.log('Submenu UL display: ' + $parentLi.children('ul').css('display'));
                         // Trigger resize for sidebar adjustments
-                        $window.trigger('resize.sidebar');
+                        $window.trigger('resize');
                     });
                 });
             })(jQuery);
