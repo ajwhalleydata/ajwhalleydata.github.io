@@ -1,1 +1,0 @@
-# ajwhalleydata.github.io
