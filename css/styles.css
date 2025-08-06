@@ -13,7 +13,7 @@ body {
   transition: margin-left 0.3s ease;
 }
 
-.sidebar {
+#sidebar {
   width: 250px;
   background-color: #252525;
   padding: 30px;
@@ -25,7 +25,7 @@ body {
   transition: transform 0.3s ease;
 }
 
-.sidebar.hidden {
+#sidebar.hidden {
   transform: translateX(-250px);
 }
 
@@ -33,7 +33,7 @@ body.sidebar-hidden {
   margin-left: 0;
 }
 
-.sidebar .profile-img {
+#sidebar .profile-img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -42,28 +42,28 @@ body.sidebar-hidden {
   overflow: hidden;
 }
 
-.sidebar .profile-img img {
+#sidebar .profile-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.sidebar h1 {
+#sidebar h1 {
   font-size: 24px;
   color: #928b62;
   margin-bottom: 30px;
 }
 
-.sidebar nav ul {
+#sidebar nav ul {
   list-style: none;
   width: 100%;
 }
 
-.sidebar nav ul li {
+#sidebar nav ul li {
   margin: 15px 0;
 }
 
-.sidebar nav ul li a {
+#sidebar nav ul li a {
   color: #ffffff;
   text-decoration: none;
   font-size: 18px;
@@ -73,25 +73,25 @@ body.sidebar-hidden {
   transition: color 0.3s;
 }
 
-.sidebar nav ul li a:hover {
+#sidebar nav ul li a:hover {
   color: #928b62;
 }
 
-.sidebar nav ul li a.active {
+#sidebar nav ul li a.active {
   color: #928b62;
 }
 
-.sidebar nav ul li a .material-icons-outlined {
+#sidebar nav ul li a .material-icons-outlined {
   font-size: 24px;
   color: #ffffff;
   transition: color 0.3s;
 }
 
-.sidebar nav ul li a:hover .material-icons-outlined {
+#sidebar nav ul li a:hover .material-icons-outlined {
   color: #928b62;
 }
 
-.sidebar nav ul li a.active .material-icons-outlined {
+#sidebar nav ul li a.active .material-icons-outlined {
   color: #928b62;
 }
 
@@ -228,7 +228,7 @@ body.sidebar-hidden .main-content {
 }
 
 @media (max-width: 768px) {
-  .sidebar {
+  #sidebar {
     width: 100%;
     height: auto;
     position: static;
