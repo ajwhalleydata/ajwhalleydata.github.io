@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <aside id="sidebar" style="display: none;"></aside>
+    <aside id="sidebar"></aside>
     <div id="sidebarButton"></div>
 
     <main class="main-content">
@@ -79,64 +79,44 @@
     </main>
 
     <script>
-        // Highlight active navigation link
-        function highlightActiveLink() {
-            const path = window.location.pathname.toLowerCase();
-            const navLinks = document.querySelectorAll('#sidebar nav a');
-
-            navLinks.forEach(link => {
-                const navType = link.getAttribute('data-nav');
-                link.classList.remove('active');
-
-                if (navType === 'home' && (path === '' || path === '/' || path.includes('index.html'))) {
-                    link.classList.add('active');
-                } else if (navType === 'projects' && path.includes('/projects/')) {
-                    link.classList.add('active');
-                } else if (navType === 'videos' && path.includes('/videos/')) {
-                    link.classList.add('active');
-                } else if (navType === 'contact' && path.includes('/contact/')) {
-                    link.classList.add('active');
-                }
+        // Load partials on page load
+        window.addEventListener('DOMContentLoaded', () => {
+          // Load sidebar content
+          fetch('inc/sidebar-content.html')
+            .then(response => response.text())
+            .then(html => {
+              document.getElementById('sidebar').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading sidebar:', error));
+      
+          // Load sidebar button
+          fetch('inc/sidebar-button.html')
+            .then(response => response.text())
+            .then(html => {
+              document.getElementById('sidebarButton').innerHTML = html;
+              // After loading the button, attach the toggle event
+              attachToggleEvent();
+            })
+            .catch(error => console.error('Error loading button:', error));
+        });
+      
+        // Function to attach toggle event (called after button loads)
+        function attachToggleEvent() {
+          const sidebar = document.getElementById('sidebar');
+          const toggleButton = document.querySelector('#sidebarButton button'); // Assumes your button in sidebar-button.html has a <button> tag; adjust selector if needed (e.g., by id or class)
+      
+          if (toggleButton) {
+            toggleButton.addEventListener('click', () => {
+              if (sidebar.style.display === 'none' || sidebar.style.display === '') {
+                sidebar.style.display = 'block'; // Show sidebar (use 'flex' if your layout requires it)
+                toggleButton.innerHTML = '◀'; // Update to left chevron (hide icon); adjust if your button uses text or SVG
+              } else {
+                sidebar.style.display = 'none'; // Hide sidebar
+                toggleButton.innerHTML = '▶'; // Update to right chevron (show icon)
+              }
             });
+          }
         }
-
-        // Toggle sidebar
-        const toggleBtn = document.querySelector('.toggle-btn');
-        const sidebar = document.querySelector('#sidebar');
-        const body = document.body;
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-            body.classList.toggle('sidebar-hidden');
-            const icon = toggleBtn.querySelector('span');
-            icon.textContent = sidebar.classList.contains('hidden') ? 'chevron_right' : 'chevron_left';
-        });
-
-        // Smooth scrolling for navigation links on the same page
-        document.querySelectorAll('.sidebar nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                // Check if the link is an anchor on the current page
-                if (href.startsWith('#') && window.location.pathname.match(/\/(index\.html)?$/)) {
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-                // Allow default navigation for other pages (e.g., /projects/, /videos/)
-            });
-        });
-
-        // Run on page load
-        highlightActiveLink();
-
-        // Handle navigation changes (for browser back/forward)
-        window.addEventListener('popstate', highlightActiveLink);
-    </script>
+      </script>
 </body>
 </html>
