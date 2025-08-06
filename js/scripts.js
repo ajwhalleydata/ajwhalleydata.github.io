@@ -26,23 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const sidebarButton = document.getElementById('sidebarButton');
         if (sidebarButton) {
           sidebarButton.innerHTML = html;
-          // Retry binding event listener for up to 2 seconds
-          let attempts = 0;
-          const maxAttempts = 20;
-          const bindToggle = () => {
-            const toggleButton = document.getElementById('toggle-sidebar');
-            if (toggleButton) {
-              attachToggleEvent(toggleButton);
-              console.log('Toggle button bound successfully');
-            } else if (attempts < maxAttempts) {
-              attempts++;
-              console.warn(`Toggle button (#toggle-sidebar) not found, retrying (${attempts}/${maxAttempts})...`);
-              setTimeout(bindToggle, 100);
-            } else {
-              console.error('Failed to find toggle button after retries. Ensure inc/sidebar-button.html contains <button id="toggle-sidebar">');
-            }
-          };
-          bindToggle();
+          const toggleButton = document.getElementById('toggle-sidebar');
+          if (toggleButton) {
+            attachToggleEvent(toggleButton);
+            console.log('Toggle button bound successfully');
+          } else {
+            console.error('Toggle button (#toggle-sidebar) not found in sidebar-button.html');
+          }
         } else {
           console.error('SidebarButton element (#sidebarButton) not found in DOM');
         }
@@ -58,32 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       console.error('Sidebar element (#sidebar) not found on load');
     }
-  });
-  
-  function attachToggleEvent(toggleButton) {
+});
+
+function attachToggleEvent(toggleButton) {
     const sidebar = document.getElementById('sidebar');
     const body = document.body;
-  
+
     toggleButton.addEventListener('click', () => {
-      body.classList.toggle('sidebar-hidden');
-      sidebar.classList.toggle('hidden');
-      toggleButton.innerHTML = body.classList.contains('sidebar-hidden') ? '▶' : '◀';
-      console.log('Sidebar toggled:', body.classList.contains('sidebar-hidden') ? 'Hidden' : 'Visible');
+        body.classList.toggle('sidebar-hidden');
+        sidebar.classList.toggle('hidden');
+        // Update toggle button icon
+        const icon = toggleButton.querySelector('.material-icons-outlined');
+        icon.textContent = body.classList.contains('sidebar-hidden') ? 'chevron_right' : 'chevron_left';
+        console.log('Sidebar toggled:', body.classList.contains('sidebar-hidden') ? 'Hidden' : 'Visible');
     });
-  }
-  
-  function highlightActiveLink() {
+}
+
+function highlightActiveLink() {
     const path = window.location.pathname.toLowerCase();
     const links = document.querySelectorAll('#sidebar nav ul li a');
   
     links.forEach(link => {
-      const href = link.getAttribute('href').toLowerCase();
-      if (
-        (path === '/' || path.includes('index.html')) && href.includes('index.html') ||
-        path.includes('/projects/') && href.includes('projects/') ||
-        path.includes('/videos/') && href.includes('videos/')
-      ) {
-        link.classList.add('active');
-      }
+        const href = link.getAttribute('href').toLowerCase();
+        if (
+            (path === '/' || path.includes('index.html')) && href.includes('index.html') ||
+            path.includes('/projects/') && href.includes('projects/') ||
+            path.includes('/videos/') && href.includes('videos/')
+        ) {
+            link.classList.add('active');
+        }
     });
-  }
+}

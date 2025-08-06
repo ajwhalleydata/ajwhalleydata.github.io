@@ -1,9 +1,22 @@
-// Common color variables
-$primary-color: #007bff; // Blue for accents
-$secondary-color: #6c757d; // Gray for text
-$background-color: #f8f9fa; // Light background
-$sidebar-bg: #343a40; // Dark for sidebar (adjust as needed)
-$text-color: #212529; // Dark text
+$baseBrand: #7c7656;
+
+// Background color variables
+$bgBrand: #928d73; // Brand/accent background color
+$bgBody: #1A1B21; // Body background
+$bgSidebar: #20212A; // Sidebar background
+$bgCard: #20212A;
+
+// Foreground color variables
+$fgBrand: #928d73; // For text or icons placed on body background
+$fgBrandLight: #9f9b83; // Brighter brand text/icons
+$fgBrandDark: #262418; // For text or icons placed on brand background
+$fgBody: #9C9FB3; // Body text
+$fgBodyLight: #C4C7D2; // Brighter body text/icons
+
+// Border color variables
+$bdrSidebar: #272933;
+$bdrCard: #272933;
+$bdrButton: #aca893;
 
 // Other common values (e.g., fonts, sizes)
 $font-family: 'Arial, sans-serif';

@@ -9,29 +9,35 @@
 
 body {
     font-family: 'Saira', sans-serif;
-    background-color: #1a1a1a;
-    color: #ffffff;
+    background-color: $bgBody;
+    color: $fgBody;
     display: flex;
     min-height: 100vh;
-    transition: margin-left 0.3s ease;
+}
+
+a {
+    color: $fgBodyLight;
 }
 
 #sidebar {
-    width: 250px;
-    background-color: #252525;
-    padding: 30px;
+    width: 200px;
+    background-color: $bgSidebar;
+    border-right: 1px solid $bdrSidebar;
+    padding: 32px;
     position: fixed;
+    top: 0;
+    left: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateX(0); // Visible by default
+    transform: translateX(0);
     transition: transform 0.3s ease;
-    z-index: 999; // Below button
+    z-index: 999;
 }
 
 #sidebar.hidden {
-    transform: translateX(-250px);
+    transform: translateX(-100%);
 }
 
 body.sidebar-hidden {
@@ -40,27 +46,35 @@ body.sidebar-hidden {
 
 #sidebar .sidebar-inner {
     width: 100%;
-}
-
-#sidebar .profile-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
-#sidebar .profile-img img {
-    width: 100%;
     height: 100%;
+    position: relative; /* Allow absolute positioning of children */
+}
+
+#sidebar .profile {
+    position: sticky;
+    top: 32px; /* Align with sidebar padding */
+    text-align: center;
+}
+
+#sidebar .profile img {
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
 #sidebar h1 {
     font-size: 24px;
-    color: #928b62;
-    margin-bottom: 30px;
+    color: $fgBrand;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#sidebar nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
 }
 
 #sidebar nav ul {
@@ -69,72 +83,90 @@ body.sidebar-hidden {
 }
 
 #sidebar nav ul li {
-    margin: 15px 0;
+    margin: 16px 0;
 }
 
 #sidebar nav ul li a {
-    color: #ffffff;
+    color: $fgBody;
     text-decoration: none;
     font-size: 18px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     transition: color 0.3s;
 }
 
 #sidebar nav ul li a:hover {
-    color: #928b62;
+    color: $fgBrand;
 }
 
 #sidebar nav ul li a.active {
-    color: #928b62;
+    color: $fgBodyLight;
 }
 
 #sidebar nav ul li a .material-icons-outlined {
     font-size: 24px;
-    color: #ffffff;
+    color: $fgBody;
     transition: color 0.3s;
 }
 
 #sidebar nav ul li a:hover .material-icons-outlined {
-    color: #928b62;
+    color: $fgBrand;
 }
 
 #sidebar nav ul li a.active .material-icons-outlined {
-    color: #928b62;
+    color: $fgBodyLight;
 }
 
 .social-icons {
-    margin-top: auto;
+    position: absolute;
+    bottom: 0;
     display: flex;
-    gap: 15px;
+    gap: 8px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: nowrap;
 }
 
 .social-icons a {
-    color: #ffffff;
-    font-size: 24px;
+    color: $fgBrand;
+    text-decoration: none;
+    font-size: 22px;
     transition: color 0.3s;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
 }
 
 .social-icons a:hover {
-    color: #928b62;
+    color: $fgBodyLight;
 }
 
 .social-icons a .material-icons-outlined {
-    font-size: 24px;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    display: block;
 }
 
 .toggle-btn {
     position: fixed;
-    left: 230px;
+    left: 199px; /* Align with sidebar's right edge */
     top: 50%;
     transform: translateY(-50%);
-    background-color: #928b62;
-    color: #1a1a1a;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    background-color: $bgSidebar;
+    color: $fgBody;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: $bdrSidebar;
+    border-radius: 0 8px 8px 0;
+    width: 24px;
+    height: 32px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -148,54 +180,48 @@ body.sidebar-hidden .toggle-btn {
 }
 
 .main-content {
-    margin-left: 250px;
-    padding: 40px;
+    margin-left: 200px;
+    padding: 32px;
     flex: 1;
-    width: calc(100% - 250px);
     transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 body.sidebar-hidden .main-content {
     margin-left: 0;
     width: 100%;
-    max-width: 100%;
 }
 
-.welcome-section {
-    margin-bottom: 60px;
+section {
+    margin-bottom: 64px;
 }
 
 .welcome-section h2 {
     font-size: 36px;
-    color: #928b62;
-    margin-bottom: 20px;
+    color: $fgBrand;
+    margin-bottom: 16px;
 }
 
 .welcome-section p {
     font-size: 18px;
     line-height: 1.6;
-    max-width: 600px;
-}
-
-.projects-section, .videos-section {
-    margin-bottom: 60px;
 }
 
 .projects-section h2, .videos-section h2 {
     font-size: 28px;
-    color: #928b62;
-    margin-bottom: 30px;
+    color: $fgBrandLight;
+    margin-bottom: 16px;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 16px;
 }
 
 .project-card, .video-card {
-    background-color: #252525;
-    padding: 20px;
+    background-color: $bgCard;
+    border: 1px solid $bdrCard;
+    padding: 16px;
     border-radius: 8px;
     transition: transform 0.3s;
 }
@@ -206,16 +232,15 @@ body.sidebar-hidden .main-content {
 
 .project-card img, .video-card img {
     width: 100%;
-    height: 200px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .project-card h3, .video-card h3 {
     font-size: 20px;
-    color: #928b62;
-    margin-bottom: 10px;
+    color: $fgBodyLight;
+    margin-bottom: 8px;
 }
 
 .project-card p, .video-card p {
@@ -225,18 +250,19 @@ body.sidebar-hidden .main-content {
 
 .btn {
     display: inline-block;
-    padding: 12px 24px;
-    background-color: #928b62;
-    color: #1a1a1a;
+    padding: 8px 16px;
+    background-color: $bgBrand;
+    color: $fgBrandDark;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
+    border: 1px solid $bdrButton;
+    border-radius: 8px;
+    margin-top: 16px;
     font-weight: 600;
     transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #7a7452;
+    background-color: $fgBrandLight;
 }
 
 @media (max-width: 768px) {
@@ -248,14 +274,31 @@ body.sidebar-hidden .main-content {
     }
 
     #sidebar.hidden {
-        display: none; // Use display for mobile to avoid overlap
+        display: none;
+    }
+
+    #sidebar .sidebar-inner {
+        position: static; /* Reset for mobile */
+    }
+
+    #sidebar .profile {
+        position: static; /* Reset for mobile */
+    }
+
+    #sidebar nav {
+        position: static; /* Reset for mobile */
+        transform: none;
+    }
+
+    #sidebar .social-icons {
+        position: static; /* Reset for mobile */
+        margin-top: 20px;
     }
 
     .main-content {
         margin-left: 0;
-        padding: 20px;
+        padding: 16px;
         width: 100%;
-        max-width: 100%;
     }
 
     .grid {
@@ -267,6 +310,7 @@ body.sidebar-hidden .main-content {
         right: 10px;
         top: 20px;
         transform: none;
+        border-radius: 50%;
     }
 
     body.sidebar-hidden .toggle-btn {
