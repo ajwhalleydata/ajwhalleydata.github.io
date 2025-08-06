@@ -26,7 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const sidebarButton = document.getElementById('sidebarButton');
         if (sidebarButton) {
           sidebarButton.innerHTML = html;
-          attachToggleEvent();
+          // Retry binding event listener to handle async DOM updates
+          let attempts = 0;
+          const maxAttempts = 5;
+          const bindToggle = () => {
+            const toggleButton = document.getElementById('toggle-sidebar');
+            if (toggleButton) {
+              attachToggleEvent(toggleButton);
+            } else if (attempts < maxAttempts) {
+              attempts++;
+              console.warn(`Toggle button not found, retrying (${attempts}/${maxAttempts})...`);
+              setTimeout(bindToggle, 100);
+            } else {
+              console.error('Failed to find toggle button after retries');
+            }
+          };
+          bindToggle();
         } else {
           console.error('SidebarButton element not found');
         }
@@ -39,23 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     if (sidebar) {
       sidebar.classList.remove('hidden');
+    } else {
+      console.error('Sidebar element not found on load');
     }
   });
   
-  function attachToggleEvent() {
+  function attachToggleEvent(toggleButton) {
     const sidebar = document.getElementById('sidebar');
-    const toggleButton = document.getElementById('toggle-sidebar');
     const body = document.body;
   
-    if (toggleButton) {
-      toggleButton.addEventListener('click', () => {
-        body.classList.toggle('sidebar-hidden');
-        sidebar.classList.toggle('hidden');
-        toggleButton.innerHTML = body.classList.contains('sidebar-hidden') ? '▶' : '◀';
-      });
-    } else {
-      console.error('Toggle button not found. Ensure inc/sidebar-button.html contains <button id="toggle-sidebar">');
-    }
+    toggleButton.addEventListener('click', () => {
+      body.classList.toggle('sidebar-hidden');
+      sidebar.classList.toggle('hidden');
+      toggleButton.innerHTML = body.classList.contains('sidebar-hidden') ? '▶' : '◀';
+      console.log('Toggled sidebar:', body.classList.contains('sidebar-hidden') ? 'Hidden' : 'Visible');
+    });
   }
   
   function highlightActiveLink() {
