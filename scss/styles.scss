@@ -25,7 +25,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transform: translateX(0); // Visible by default
     transition: transform 0.3s ease;
+    z-index: 999; // Below button
 }
 
 #sidebar.hidden {
@@ -149,14 +151,14 @@ body.sidebar-hidden .toggle-btn {
     margin-left: 250px;
     padding: 40px;
     flex: 1;
-    width: calc(100% - 250px); // Ensure it takes remaining space when sidebar is visible
+    width: calc(100% - 250px);
     transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 body.sidebar-hidden .main-content {
     margin-left: 0;
-    width: 100%; // Full viewport width when sidebar is hidden
-    max-width: 100%; // Remove max-width constraint
+    width: 100%;
+    max-width: 100%;
 }
 
 .welcome-section {
@@ -242,12 +244,17 @@ body.sidebar-hidden .main-content {
         width: 100%;
         height: auto;
         position: static;
+        transform: none;
+    }
+
+    #sidebar.hidden {
+        display: none; // Use display for mobile to avoid overlap
     }
 
     .main-content {
         margin-left: 0;
         padding: 20px;
-        width: 100%; // Full width on mobile
+        width: 100%;
         max-width: 100%;
     }
 
