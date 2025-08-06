@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap');
 @import '_variables';
 
 * {
@@ -33,6 +34,10 @@ body {
 
 body.sidebar-hidden {
     margin-left: 0;
+}
+
+#sidebar .sidebar-inner {
+    width: 100%;
 }
 
 #sidebar .profile-img {
@@ -144,11 +149,14 @@ body.sidebar-hidden .toggle-btn {
     margin-left: 250px;
     padding: 40px;
     flex: 1;
-    transition: margin-left 0.3s ease;
+    width: calc(100% - 250px); // Ensure it takes remaining space when sidebar is visible
+    transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 body.sidebar-hidden .main-content {
     margin-left: 0;
+    width: 100%; // Full viewport width when sidebar is hidden
+    max-width: 100%; // Remove max-width constraint
 }
 
 .welcome-section {
@@ -239,6 +247,8 @@ body.sidebar-hidden .main-content {
     .main-content {
         margin-left: 0;
         padding: 20px;
+        width: 100%; // Full width on mobile
+        max-width: 100%;
     }
 
     .grid {

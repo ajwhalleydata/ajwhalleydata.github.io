@@ -77,46 +77,6 @@
             <a href="#" class="btn">View All Videos</a>
         </section>
     </main>
-
-    <script>
-        // Load partials on page load
-        window.addEventListener('DOMContentLoaded', () => {
-          // Load sidebar content
-          fetch('inc/sidebar-content.html')
-            .then(response => response.text())
-            .then(html => {
-              document.getElementById('sidebar').innerHTML = html;
-            })
-            .catch(error => console.error('Error loading sidebar:', error));
-      
-          // Load sidebar button
-          fetch('inc/sidebar-button.html')
-            .then(response => response.text())
-            .then(html => {
-              document.getElementById('sidebarButton').innerHTML = html;
-              // After loading the button, attach the toggle event
-              attachToggleEvent();
-            })
-            .catch(error => console.error('Error loading button:', error));
-        });
-      
-        // Function to attach toggle event (called after button loads)
-        function attachToggleEvent() {
-          const sidebar = document.getElementById('sidebar');
-          const toggleButton = document.querySelector('#sidebarButton button'); // Assumes your button in sidebar-button.html has a <button> tag; adjust selector if needed (e.g., by id or class)
-      
-          if (toggleButton) {
-            toggleButton.addEventListener('click', () => {
-              if (sidebar.style.display === 'none' || sidebar.style.display === '') {
-                sidebar.style.display = 'block'; // Show sidebar (use 'flex' if your layout requires it)
-                toggleButton.innerHTML = '◀'; // Update to left chevron (hide icon); adjust if your button uses text or SVG
-              } else {
-                sidebar.style.display = 'none'; // Hide sidebar
-                toggleButton.innerHTML = '▶'; // Update to right chevron (show icon)
-              }
-            });
-          }
-        }
-      </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
