@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
           sidebar.innerHTML = html;
           highlightActiveLink();
         } else {
-          console.error('Sidebar element not found');
+          console.error('Sidebar element (#sidebar) not found in DOM');
         }
       })
       .catch(error => console.error('Error loading sidebar content:', error));
@@ -26,24 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const sidebarButton = document.getElementById('sidebarButton');
         if (sidebarButton) {
           sidebarButton.innerHTML = html;
-          // Retry binding event listener to handle async DOM updates
+          // Retry binding event listener for up to 2 seconds
           let attempts = 0;
-          const maxAttempts = 5;
+          const maxAttempts = 20;
           const bindToggle = () => {
             const toggleButton = document.getElementById('toggle-sidebar');
             if (toggleButton) {
               attachToggleEvent(toggleButton);
+              console.log('Toggle button bound successfully');
             } else if (attempts < maxAttempts) {
               attempts++;
-              console.warn(`Toggle button not found, retrying (${attempts}/${maxAttempts})...`);
+              console.warn(`Toggle button (#toggle-sidebar) not found, retrying (${attempts}/${maxAttempts})...`);
               setTimeout(bindToggle, 100);
             } else {
-              console.error('Failed to find toggle button after retries');
+              console.error('Failed to find toggle button after retries. Ensure inc/sidebar-button.html contains <button id="toggle-sidebar">');
             }
           };
           bindToggle();
         } else {
-          console.error('SidebarButton element not found');
+          console.error('SidebarButton element (#sidebarButton) not found in DOM');
         }
       })
       .catch(error => console.error('Error loading sidebar button:', error));
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sidebar) {
       sidebar.classList.remove('hidden');
     } else {
-      console.error('Sidebar element not found on load');
+      console.error('Sidebar element (#sidebar) not found on load');
     }
   });
   
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       body.classList.toggle('sidebar-hidden');
       sidebar.classList.toggle('hidden');
       toggleButton.innerHTML = body.classList.contains('sidebar-hidden') ? '▶' : '◀';
-      console.log('Toggled sidebar:', body.classList.contains('sidebar-hidden') ? 'Hidden' : 'Visible');
+      console.log('Sidebar toggled:', body.classList.contains('sidebar-hidden') ? 'Hidden' : 'Visible');
     });
   }
   
