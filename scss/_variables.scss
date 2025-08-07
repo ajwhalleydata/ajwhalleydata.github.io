@@ -1,23 +1,17 @@
-$baseBrand: #7c7656;
+// Neutral colors
+$neutral1: #dedfe6;
+$neutral2: #bcbfcd;
+$neutral3: #8288a0;
+$neutral4: #6F7691;
+$neutral5: #272933;
+$neutral6: #20212A;
+$neutral7: #1A1B21;
 
-// Background color variables
-$bgBrand: #928d73; // Brand/accent background color
-$bgBody: #1A1B21; // Body background
-$bgSidebar: #20212A; // Sidebar background
-$bgCard: #20212A;
-
-// Foreground color variables
-$fgBrand: #928d73; // For text or icons placed on body background
-$fgBrandLight: #9f9b83; // Brighter brand text/icons
-$fgBrandDark: #262418; // For text or icons placed on brand background
-$fgBody: #9C9FB3; // Body text
-$fgBodyLight: #C4C7D2; // Brighter body text/icons
-
-// Border color variables
-$bdrSidebar: #272933;
-$bdrCard: #272933;
-$bdrButton: #aca893;
-$bdrBrand: #928d73;
+// Brand colors
+$brand1: #b5b19f;
+$brand2: #928d73;
+$brand3: #7c7656;
+$brand4: #282519;
 
 // Other common values (e.g., fonts, sizes)
 $font-family: 'Arial, sans-serif';

@@ -9,21 +9,21 @@
 
 body {
     font-family: 'Saira', sans-serif;
-    background-color: $bgBody;
-    color: $fgBody;
+    background-color: $neutral7;
+    color: $neutral2;
     display: flex;
     min-height: 100vh;
 }
 
 a {
-    color: $fgBodyLight;
+    color: $neutral1;
 }
 
 #sidebar {
     width: 200px;
-    background-color: $bgSidebar;
-    border-right: 1px solid $bdrSidebar;
-    padding: 32px;
+    background-color: $neutral6;
+    border-right: 1px solid $neutral5;
+    padding: 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -40,6 +40,10 @@ a {
     transform: translateX(-100%);
 }
 
+#sidebar:not(.hidden) {
+    transform: translateX(0);
+}
+
 body.sidebar-hidden {
     margin-left: 0;
 }
@@ -47,17 +51,20 @@ body.sidebar-hidden {
 #sidebar .sidebar-inner {
     width: 100%;
     height: 100%;
-    position: relative; /* Allow absolute positioning of children */
+    position: relative;
 }
 
 #sidebar .profile {
     position: sticky;
-    top: 32px; /* Align with sidebar padding */
+    top: 48px;
     text-align: center;
+    display: block; /* Desktop visible */
 }
 
 #sidebar .profile-title {
     font-weight: 600;
+    font-size: 18px;
+    color: $neutral3;
 }
 
 #sidebar .profile img {
@@ -65,14 +72,14 @@ body.sidebar-hidden {
     height: 136px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid $bgSidebar;
-    outline: 2px solid $bdrBrand;
+    border: 2px solid $neutral6;
+    outline: 2px solid $brand2;
 }
 
 #sidebar h1 {
     font-size: 24px;
-    color: $fgBrand;
-    margin-top: 0;
+    color: $brand2;
+    margin-top: 8px;
     margin-bottom: 0;
 }
 
@@ -88,40 +95,45 @@ body.sidebar-hidden {
     width: 100%;
 }
 
-#sidebar nav ul li {
-    margin: 16px 0;
-}
-
 #sidebar nav ul li a {
-    color: $fgBody;
+    color: $neutral2;
     text-decoration: none;
     font-size: 18px;
     display: flex;
     align-items: center;
     gap: 8px;
     transition: color 0.3s;
+    padding: 8px 32px;
+    border-top: 1px solid $neutral6;
+    border-bottom: 1px solid $neutral6;
 }
 
 #sidebar nav ul li a:hover {
-    color: $fgBrand;
+    color: $brand2;
+    background: linear-gradient(to right, #1A1B21, #20212A);
+    border-top: 1px solid $neutral6;
+    border-bottom: 1px solid $neutral6;
 }
 
 #sidebar nav ul li a.active {
-    color: $fgBodyLight;
+    color: $neutral1;
+    background: linear-gradient(to right, #1A1B21, #20212A);
+    border-top: 1px solid $neutral5;
+    border-bottom: 1px solid $neutral5;
 }
 
 #sidebar nav ul li a .material-icons-outlined {
     font-size: 24px;
-    color: $fgBody;
+    color: $neutral2;
     transition: color 0.3s;
 }
 
 #sidebar nav ul li a:hover .material-icons-outlined {
-    color: $fgBrand;
+    color: $brand2;
 }
 
 #sidebar nav ul li a.active .material-icons-outlined {
-    color: $fgBodyLight;
+    color: $neutral1;
 }
 
 .social-icons {
@@ -132,11 +144,12 @@ body.sidebar-hidden {
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
+    padding: 32px;
     flex-wrap: nowrap;
 }
 
 .social-icons a {
-    color: $fgBrand;
+    color: $brand2;
     text-decoration: none;
     font-size: 22px;
     transition: color 0.3s;
@@ -149,7 +162,7 @@ body.sidebar-hidden {
 }
 
 .social-icons a:hover {
-    color: $fgBodyLight;
+    color: $neutral1;
 }
 
 .social-icons a .material-icons-outlined {
@@ -161,14 +174,14 @@ body.sidebar-hidden {
 
 .toggle-btn {
     position: fixed;
-    left: 199px; /* Align with sidebar's right edge */
+    left: 199px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: $bgSidebar;
-    color: $fgBody;
+    background-color: $neutral6;
+    color: $neutral2;
     border-width: 1px 1px 1px 0;
     border-style: solid;
-    border-color: $bdrSidebar;
+    border-color: $neutral5;
     border-radius: 0 8px 8px 0;
     width: 24px;
     height: 32px;
@@ -179,6 +192,7 @@ body.sidebar-hidden {
     cursor: pointer;
     transition: left 0.3s ease;
     z-index: 1000;
+    display: block; /* Desktop visible */
 }
 
 body.sidebar-hidden .toggle-btn {
@@ -197,13 +211,72 @@ body.sidebar-hidden .main-content {
     width: 100%;
 }
 
+.mobile-header {
+    display: none; /* Hidden on desktop */
+    align-items: center;
+    justify-content: space-between; /* Space between profile group and hamburger */
+    padding: 16px 0;
+    background-color: $neutral7;
+    border-bottom: 1px solid $neutral5;
+    position: sticky;
+    top: 0;
+    z-index: 998;
+}
+
+.mobile-header .mobile-profile-group {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-header .hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-header .hamburger .material-icons-outlined {
+    font-size: 28px;
+    color: $neutral1;
+}
+
+.mobile-header .mobile-profile-img {
+    border-radius: 50%;
+    border: 2px solid $neutral6;
+    outline: 2px solid $brand2;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+.mobile-header h1 {
+    font-size: 24px;
+    color: $brand2;
+    margin: 0;
+}
+
+.close-btn {
+    width: 28px;
+    height: 28px;
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 16px;
+}
+
+.close-btn .material-icons-outlined {
+    font-size: 28px;
+    color: $neutral1;
+}
+
 section {
     margin-bottom: 64px;
 }
 
 .welcome-section h2 {
     font-size: 36px;
-    color: $fgBrand;
+    color: $brand2;
     margin-bottom: 0;
 }
 
@@ -214,8 +287,8 @@ section {
 
 .projects-section h2, .videos-section h2 {
     font-size: 28px;
-    color: $fgBrandLight;
-    margin-bottom: 16px;
+    color: $brand1;
+    margin-bottom: 8px;
 }
 
 .grid {
@@ -225,8 +298,8 @@ section {
 }
 
 .project-card, .video-card {
-    background-color: $bgCard;
-    border: 1px solid $bdrCard;
+    background-color: $neutral6;
+    border: 1px solid $neutral5;
     padding: 16px;
     border-radius: 8px;
     transition: transform 0.3s;
@@ -245,8 +318,8 @@ section {
 
 .project-card h3, .video-card h3 {
     font-size: 20px;
-    color: $fgBodyLight;
-    margin-bottom: 8px;
+    color: $neutral1;
+    margin-bottom: 0;
 }
 
 .project-card p, .video-card p {
@@ -254,13 +327,21 @@ section {
     line-height: 1.5;
 }
 
+.post-date {
+    color: $neutral3;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 .btn {
     display: inline-block;
     padding: 8px 16px;
-    background-color: $bgBrand;
-    color: $fgBrandDark;
+    background-color: $brand2;
+    color: $brand4;
     text-decoration: none;
-    border: 1px solid $bdrButton;
+    border: 1px solid $brand1;
     border-radius: 8px;
     margin-top: 24px;
     font-weight: 600;
@@ -268,59 +349,118 @@ section {
 }
 
 .btn:hover {
-    background-color: $fgBrandLight;
+    background-color: $brand1;
 }
 
 @media (max-width: 768px) {
     #sidebar {
-        width: 100%;
-        height: auto;
-        position: static;
-        transform: none;
+        box-shadow: 2px 0 16px #000;
+        display: none; /* Hidden by default on mobile */
+        transform: translateX(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 16px 0;
     }
 
     #sidebar.hidden {
         display: none;
+        transform: translateX(-100%);
+        opacity: 0;
     }
 
-    #sidebar .sidebar-inner {
-        position: static; /* Reset for mobile */
+    #sidebar:not(.hidden) {
+        display: flex;
+        transform: translateX(0);
+        opacity: 1;
     }
 
-    #sidebar .profile {
-        position: static; /* Reset for mobile */
+    .toggle-btn {
+        display: none; /* Hide desktop toggle on mobile */
     }
 
-    #sidebar nav {
-        position: static; /* Reset for mobile */
-        transform: none;
+    .mobile-header {
+        display: flex; /* Show on mobile */
     }
 
-    #sidebar .social-icons {
-        position: static; /* Reset for mobile */
-        margin-top: 20px;
+    .close-btn {
+        display: block; /* Show X on mobile */
     }
 
     .main-content {
         margin-left: 0;
-        padding: 16px;
+        padding: 0 16px 16px;
         width: 100%;
+        transition: none;
+    }
+
+    section {
+        margin-bottom: 32px;
+    }
+
+    .welcome-section {
+        margin-top: 32px; /* Space below mobile-header */
+    }
+
+    .welcome-section h2 {
+        font-size: 28px;
+    }
+
+    .welcome-section p {
+        font-size: 16px;
+    }
+
+    .projects-section h2, .videos-section h2 {
+        font-size: 24px;
     }
 
     .grid {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .toggle-btn {
-        left: auto;
-        right: 10px;
-        top: 20px;
-        transform: none;
-        border-radius: 50%;
+    .project-card img, .video-card img {
+        height: auto;
+        max-height: 200px;
     }
 
-    body.sidebar-hidden .toggle-btn {
-        left: auto;
-        right: 10px;
+    .project-card h3, .video-card h3 {
+        font-size: 18px;
+    }
+
+    .project-card p, .video-card p {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 14px;
+        margin-top: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section h2 {
+        font-size: 24px;
+    }
+
+    .welcome-section p {
+        font-size: 14px;
+    }
+
+    .projects-section h2, .videos-section h2 {
+        font-size: 20px;
+    }
+
+    .project-card h3, .video-card h3 {
+        font-size: 16px;
+    }
+
+    .project-card p, .video-card p {
+        font-size: 13px;
+    }
+
+    .btn {
+        font-size: 13px;
     }
 }
