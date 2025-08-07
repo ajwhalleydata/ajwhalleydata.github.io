@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;600&display=swap');
 @import '_variables';
 
 * {
@@ -56,11 +56,17 @@ body.sidebar-hidden {
     text-align: center;
 }
 
+#sidebar .profile-title {
+    font-weight: 600;
+}
+
 #sidebar .profile img {
     width: 136px;
     height: 136px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid $bgSidebar;
+    outline: 2px solid $bdrBrand;
 }
 
 #sidebar h1 {
@@ -256,7 +262,7 @@ section {
     text-decoration: none;
     border: 1px solid $bdrButton;
     border-radius: 8px;
-    margin-top: 16px;
+    margin-top: 24px;
     font-weight: 600;
     transition: background-color 0.3s;
 }

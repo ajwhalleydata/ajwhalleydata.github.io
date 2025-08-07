@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Saira:wght@400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -54,11 +54,17 @@ body.sidebar-hidden {
   text-align: center;
 }
 
+#sidebar .profile-title {
+  font-weight: 600;
+}
+
 #sidebar .profile img {
   width: 136px;
   height: 136px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #20212A;
+  outline: 2px solid #928d73;
 }
 
 #sidebar h1 {
@@ -254,7 +260,7 @@ section {
   text-decoration: none;
   border: 1px solid #aca893;
   border-radius: 8px;
-  margin-top: 16px;
+  margin-top: 24px;
   font-weight: 600;
   transition: background-color 0.3s;
 }
