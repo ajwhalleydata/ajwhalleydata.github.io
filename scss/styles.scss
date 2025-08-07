@@ -187,7 +187,7 @@ body.sidebar-hidden .toggle-btn {
 
 .main-content {
     margin-left: 200px;
-    padding: 32px;
+    padding: 32px 64px;
     flex: 1;
     transition: margin-left 0.3s ease, width 0.3s ease;
 }
@@ -204,7 +204,7 @@ section {
 .welcome-section h2 {
     font-size: 36px;
     color: $fgBrand;
-    margin-bottom: 16px;
+    margin-bottom: 0;
 }
 
 .welcome-section p {
